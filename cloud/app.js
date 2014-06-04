@@ -36,33 +36,32 @@ var url = require('url');
 var querystring = require("querystring");
 
 app.get('/wx', function(req, res) {
-	// 获取GET请求的参数
-	var url_params = url.parse(req.url, true);
+			// 获取GET请求的参数
+			var url_params = url.parse(req.url, true);
 
-	console.log(req.url);
+			console.log(req.url);
 
-	var query = url_params.query;
+			var query = url_params.query;
 
-	res.writeHead(200, {
-				'Content-Type' : 'text/plain'
-			});
-	console.log('Query params:' + query.signature + query.timestamp
-			+ query.nonce);
+			res.writeHead(200, {
+						'Content-Type' : 'text/plain'
+					});
+			console.log('Query params:' + query.signature + query.timestamp
+					+ query.nonce);
 
-	if (isLegel(query.signature, query.timestamp, query.nonce)) {
-		// 返回echostr
-		// res.end(query.echostr);
-		var msg = "<xml><ToUserName><![CDATA["
-				+ query.toUserName
-				+ "]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>12345678</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好]]></Content></xml>";
-		res.end(msg);
-	} else {
-		//
-		res.end('Hello world\n');
-	}
+			if (isLegel(query.signature, query.timestamp, query.nonce)) {
+				// 返回echostr
+				res.end(query.echostr);
+			} else {
+				//
+				res.end('Hello world\n');
+			}
 });
 
 app.get('/sendMsg', function(req, res) {
+	var msg = "<xml><ToUserName><![CDATA["
+			+ querystring.parse(url.parse(req.url).query)["toUserName"]
+			+ "]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>12345678</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好]]></Content></xml>";
 	res.render('wx', {
 				message : msg
 			});
