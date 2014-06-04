@@ -13,7 +13,7 @@ app.get('/hello', function(req, res) {
 });
 
 app.get('/wx', function(req, res) {
-  res.render('wx', { message: req.get("echostr") });
+  res.render('wx', { message: res.get("echostr") });
 });
 
 // 最后，必须有这行代码来使 express 响应 HTTP 请求
