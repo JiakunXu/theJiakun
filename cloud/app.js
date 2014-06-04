@@ -87,9 +87,7 @@ app.post('/wx', function(req, res) {
 			console.log(response.xml);
 			console.log(response.xml.FromUserName);
 
-			var msg = "<xml><ToUserName><![CDATA["
-					+ querystring.parse(url.parse(req.url).query)["toUserName"]
-					+ "]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>12345678</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好]]></Content></xml>";
+			var msg = "<xml><ToUserName><![CDATA[oPvmWjirOi_4vZezkAOW3Ry_mwGU]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>12345678</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好]]></Content></xml>";
 
 			console.log(msg);
 			res.end(msg);
