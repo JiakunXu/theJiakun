@@ -32,9 +32,6 @@ var isLegel = function(signature, timestamp, nonce) {
 	}
 };
 
-var url = require('url');
-var querystring = require("querystring");
-
 app.get('/wx', function(req, res) {
 			// 获取GET请求的参数
 			var url_params = url.parse(req.url, true);
@@ -58,7 +55,10 @@ app.get('/wx', function(req, res) {
 			}
 });
 
-app.get('/sendMsg', function(req, res) {
+var url = require('url');
+var querystring = require("querystring");
+
+app.post('/wx', function(req, res) {
 	var msg = "<xml><ToUserName><![CDATA["
 			+ querystring.parse(url.parse(req.url).query)["toUserName"]
 			+ "]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>12345678</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好]]></Content></xml>";
