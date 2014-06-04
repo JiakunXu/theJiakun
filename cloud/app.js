@@ -12,8 +12,11 @@ app.get('/hello', function(req, res) {
   res.render('hello', { message: 'Congrats, you just set up your app!' });
 });
 
+var url = require('url');
+var querystring = require("querystring");
+
 app.get('/wx', function(req, res) {
-  res.render('wx', { message: req.url });
+  res.render('wx', { message: querystring.parse(url.parse(req.url).query)["echostr"] });
 });
 
 // 最后，必须有这行代码来使 express 响应 HTTP 请求
