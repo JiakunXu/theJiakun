@@ -66,9 +66,9 @@ app.post('/wx', function(req, res) {
 	// 接收数据块并将其赋值给 postData
 	req.addListener('data', function(postDataChunk) {
 				postData += postDataChunk;
+				
+				console.log(postDataChunk);
 			});
-
-	console.log(req.body);
 
 	req.addListener('end', function() {
 		// 数据接收完毕，执行回调函数
