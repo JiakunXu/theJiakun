@@ -79,7 +79,8 @@ app.post('/wx', function(req, res) {
 				+ fromUserName
 				+ "]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>"
 				+ new Date().getTime()
-				+ "</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[www.google.com]]></Content></xml>";
+				+ "</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[恭喜您 "
+				+ fromUserName + " 稍后将获得赠送话费，谢谢关注！]]></Content></xml>";
 
 		res.end(msg);
 	});
