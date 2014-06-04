@@ -23,7 +23,7 @@ app.get('/sendMsg', function(req, res) {
 	var msg = "<xml><ToUserName><![CDATA["
 			+ querystring.parse(url.parse(req.url).query)["toUserName"]
 			+ "]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>12345678</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好]]></Content></xml>";
-	res.render('sendMsg', {
+	res.render('wx', {
 				message : msg
 			});
 });
