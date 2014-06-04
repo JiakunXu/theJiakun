@@ -38,7 +38,7 @@ app.get('/wx', function(req, res) {
 			// 获取GET请求的参数
 			var url_params = url.parse(req.url, true);
 
-			console.log(req.url);
+			console.log("get:" + req.url);
 
 			var query = url_params.query;
 
@@ -61,7 +61,7 @@ var url = require('url');
 var querystring = require("querystring");
 
 app.post('/wx', function(req, res) {
-	console.log(req.url);
+	console.log("post:" + req.url);
 	
 	var msg = "<xml><ToUserName><![CDATA["
 			+ querystring.parse(url.parse(req.url).query)["toUserName"]
