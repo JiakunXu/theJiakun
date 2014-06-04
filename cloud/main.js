@@ -6,5 +6,5 @@ AV.Cloud.define("hello", function(request, response) {
 });
 
 AV.Cloud.define("wx", function(request, response) {
-  response.success(response.get("echostr"));
+  response.success();
 });
