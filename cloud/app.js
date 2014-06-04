@@ -70,14 +70,16 @@ app.post('/wx', function(req, res) {
 
 	req.addListener('end', function() {
 		// 数据接收完毕，执行回调函数
-		var s = postData.indexOf("<FromUserName><![CDATA[");
+		var s = postData.indexOf("<FromUserName><![CDATA[") + 23;
 		var e = postData.indexOf("]]></FromUserName>");
-		var fromUserName = postData.substr(s + 23, e - s);
+		var fromUserName = postData.substr(s, e - s);
 		console.log(fromUserName);
 
 		var msg = "<xml><ToUserName><![CDATA["
 				+ fromUserName
-				+ "]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>12345678</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好]]></Content></xml>";
+				+ "]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>"
+				+ new Date().getTime()
+				+ "</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[<a>www.google.com</a>]]></Content></xml>";
 
 		res.end(msg);
 	});
