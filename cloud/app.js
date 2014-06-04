@@ -66,22 +66,19 @@ app.post('/wx', function(req, res) {
 	// 接收数据块并将其赋值给 postData
 	req.addListener('data', function(postDataChunk) {
 				postData += postDataChunk;
-				
-				console.log(postDataChunk);
 			});
 
 	req.addListener('end', function() {
 		// 数据接收完毕，执行回调函数
 		var s = postData.indexOf("<FromUserName><![CDATA[");
 		var e = postData.indexOf("]]></FromUserName>");
-		var fromUserName = postData.substr(s, e - s);
+		var fromUserName = postData.substr(s + 23, e - s);
 		console.log(fromUserName);
 
 		var msg = "<xml><ToUserName><![CDATA["
 				+ fromUserName
 				+ "]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>12345678</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好]]></Content></xml>";
 
-		console.log(msg);
 		res.end(msg);
 	});
 });
