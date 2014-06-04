@@ -19,5 +19,14 @@ app.get('/wx', function(req, res) {
   res.render('wx', { message: querystring.parse(url.parse(req.url).query)["echostr"] });
 });
 
+app.get('/sendMsg', function(req, res) {
+	var msg = "<xml><ToUserName><![CDATA["
+			+ querystring.parse(url.parse(req.url).query)["toUserName"]
+			+ "]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>12345678</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好]]></Content></xml>";
+	res.render('sendMsg', {
+				message : msg
+			});
+});
+
 // 最后，必须有这行代码来使 express 响应 HTTP 请求
 app.listen();
