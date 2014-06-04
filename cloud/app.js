@@ -79,7 +79,7 @@ app.post('/wx', function(req, res) {
 				+ fromUserName
 				+ "]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>"
 				+ new Date().getTime()
-				+ "</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[<a>www.google.com</a>]]></Content></xml>";
+				+ "</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[www.google.com]]></Content></xml>";
 
 		res.end(msg);
 	});
