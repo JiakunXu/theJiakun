@@ -59,6 +59,8 @@ app.get('/wx', function(req, res) {
 
 var xmlreader = require("xmlreader"); 
 
+
+
 app.post('/wx', function(req, res) {
 	var postData = '';
 
@@ -69,6 +71,8 @@ app.post('/wx', function(req, res) {
 	req.addListener('data', function(postDataChunk) {
 				postData += postDataChunk;
 			});
+
+	console.log(req.body);
 
 	req.addListener('end', function() {
 		// 数据接收完毕，执行回调函数
