@@ -26,10 +26,10 @@ var isLegel = function(signature, timestamp, nonce) {
 	msg = sha1.digest('hex');
 	// 验证
 	if (msg == signature) {
-		console.log('验证成功');
+		console.log('验证成功！');
 		return true;
 	} else {
-		console.log('验证失败');
+		console.log('验证失败！');
 		return false;
 	}
 };
@@ -42,9 +42,6 @@ app.get('/wx', function(req, res) {
 
 			var query = url_params.query;
 
-			res.writeHead(200, {
-						'Content-Type' : 'text/plain'
-					});
 			console.log('Query params:' + query.signature + query.timestamp
 					+ query.nonce);
 
@@ -52,8 +49,7 @@ app.get('/wx', function(req, res) {
 				// 返回echostr
 				res.end(query.echostr);
 			} else {
-				//
-				res.end('Hello world\n');
+				res.end('Hello world！');
 			}
 		});
 
