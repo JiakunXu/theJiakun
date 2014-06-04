@@ -57,8 +57,7 @@ app.get('/wx', function(req, res) {
 			}
 		});
 
-var url = require('url');
-var querystring = require("querystring");
+var xmlreader = require("xmlreader"); 
 
 app.post('/wx', function(req, res) {
 	var postData = '';
@@ -75,12 +74,22 @@ app.post('/wx', function(req, res) {
 		// 数据接收完毕，执行回调函数
 		console.log("post:" + req.url + postData);
 
-		var msg = "<xml><ToUserName><![CDATA["
-				+ querystring.parse(url.parse(req.url).query)["toUserName"]
-				+ "]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>12345678</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好]]></Content></xml>";
-		
-		console.log(msg);
-		res.end(msg);
+		xmlreader.read(postData, function(errors, response) {
+			if (null !== errors) {
+				console.log(errors)
+				return;
+			}
+
+			console.log(response.xml);
+			console.log(response.xml.FromUserName);
+
+			var msg = "<xml><ToUserName><![CDATA["
+					+ querystring.parse(url.parse(req.url).query)["toUserName"]
+					+ "]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>12345678</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好]]></Content></xml>";
+
+			console.log(msg);
+			res.end(msg);
+		});
 	});
 });
 
