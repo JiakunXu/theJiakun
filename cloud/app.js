@@ -57,8 +57,6 @@ app.get('/wx', function(req, res) {
 			}
 		});
 
-var libxmljs = require("libxmljs");
-		
 app.post('/wx', function(req, res) {
 	var postData = '';
 
@@ -74,11 +72,14 @@ app.post('/wx', function(req, res) {
 
 	req.addListener('end', function() {
 		// 数据接收完毕，执行回调函数
-		var xmlDoc = libxmljs.parseXml(postData);
-		var fromUserName = xmlDoc.get('//FromUserName');
+		var s = postData.indexOf("<FromUserName><![CDATA[");
+		var e = postData.indexOf("]]></FromUserName>");
+		var fromUserName = postData.substr(s, e - s);
 		console.log(fromUserName);
 
-		var msg = "<xml><ToUserName><![CDATA[oPvmWjirOi_4vZezkAOW3Ry_mwGU]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>12345678</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好]]></Content></xml>";
+		var msg = "<xml><ToUserName><![CDATA["
+				+ fromUserName
+				+ "]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>12345678</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好]]></Content></xml>";
 
 		console.log(msg);
 		res.end(msg);
