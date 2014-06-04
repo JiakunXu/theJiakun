@@ -57,10 +57,6 @@ app.get('/wx', function(req, res) {
 			}
 		});
 
-var xmlreader = require("xmlreader"); 
-
-
-
 app.post('/wx', function(req, res) {
 	var postData = '';
 
@@ -78,20 +74,10 @@ app.post('/wx', function(req, res) {
 		// 数据接收完毕，执行回调函数
 		console.log("post:" + req.url + postData);
 
-		xmlreader.read(postData, function(errors, response) {
-			if (null !== errors) {
-				console.log(errors)
-				return;
-			}
+		var msg = "<xml><ToUserName><![CDATA[oPvmWjirOi_4vZezkAOW3Ry_mwGU]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>12345678</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好]]></Content></xml>";
 
-			console.log(response.xml);
-			console.log(response.xml.FromUserName);
-
-			var msg = "<xml><ToUserName><![CDATA[oPvmWjirOi_4vZezkAOW3Ry_mwGU]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>12345678</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好]]></Content></xml>";
-
-			console.log(msg);
-			res.end(msg);
-		});
+		console.log(msg);
+		res.end(msg);
 	});
 });
 
