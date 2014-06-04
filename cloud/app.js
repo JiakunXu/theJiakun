@@ -61,14 +61,27 @@ var url = require('url');
 var querystring = require("querystring");
 
 app.post('/wx', function(req, res) {
-	console.log("post:" + req.url);
-	
-	var msg = "<xml><ToUserName><![CDATA["
-			+ querystring.parse(url.parse(req.url).query)["toUserName"]
-			+ "]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>12345678</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好]]></Content></xml>";
-	res.render('wx', {
-				message : msg
+	var postData = '';
+
+	// 设置接收数据编码格式为 UTF-8
+	req.setEncoding('utf8');
+
+	// 接收数据块并将其赋值给 postData
+	req.addListener('data', function(postDataChunk) {
+				postData += postDataChunk;
 			});
+
+	req.addListener('end', function() {
+		// 数据接收完毕，执行回调函数
+		console.log("post:" + req.url + postData);
+
+		var msg = "<xml><ToUserName><![CDATA["
+				+ querystring.parse(url.parse(req.url).query)["toUserName"]
+				+ "]]></ToUserName><FromUserName><![CDATA[theJiakun]]></FromUserName><CreateTime>12345678</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[你好]]></Content></xml>";
+		
+		console.log(msg);
+		res.end(msg);
+	});
 });
 
 // 最后，必须有这行代码来使 express 响应 HTTP 请求
