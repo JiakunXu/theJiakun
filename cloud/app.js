@@ -47,19 +47,13 @@ app.get('/wx', function(req, res) {
 
 			if (isLegel(query.signature, query.timestamp, query.nonce)) {
 				// 返回echostr
-				// res.end(query.echostr);
-				res.render('wx', {
-							message : uery.echostr
-						});
+				res.end(query.echostr);
 			} else {
-				// res.end('Hello world！');
-				res.render('wx', {
-							message : uery.echostr
-						});
+				res.end('Hello world！');
 			}
 		});
 
-app.post('/wx1', function(req, res) {
+app.post('/wx', function(req, res) {
 	var postData = '';
 
 	// 设置接收数据编码格式为 UTF-8
@@ -84,10 +78,7 @@ app.post('/wx1', function(req, res) {
 				+ "</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[恭喜您 "
 				+ fromUserName + " 稍后将获得赠送话费，谢谢关注！]]></Content></xml>";
 
-		// res.end(msg);
-		res.render('wx', {
-					message : msg
-				});
+		res.end(msg);
 	});
 });
 
