@@ -59,7 +59,7 @@ app.get('/wx', function(req, res) {
 			}
 		});
 
-app.post('/wx', function(req, res) {
+app.post('/wx1', function(req, res) {
 	var postData = '';
 
 	// 设置接收数据编码格式为 UTF-8
