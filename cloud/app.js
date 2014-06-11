@@ -34,6 +34,8 @@ var isLegel = function(signature, timestamp, nonce) {
 	}
 };
 
+var url = require('url');
+
 app.get('/wx', function(req, res) {
 			// 获取GET请求的参数
 			var url_params = url.parse(req.url, true);
